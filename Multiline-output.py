@@ -17,22 +17,26 @@ Remember to always check to see if the window has been closed after you read it.
 """
 import PySimpleGUI as sg
 
-layout = [[sg.Text('MultiLine Output')], [sg.Multiline( size=(10, 25), disabled=True,
-                                                        autoscroll=True, reroute_stdout=True)],
-          [sg.Button('Go'), sg.Button('Erase'), sg.Button('Exit')]]
+layout = [  [sg.Text('Prime Numbers 2 to 500')],
+            [sg.Multiline(size=(10, 25), write_only=True, key='-MLINE-')],
+            [sg.Button('Start')]  ]
 
-window = sg.Window('', layout)
+window = sg.Window('Prime Numbers 2 to 500', layout)
 
 while True:
     event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Exit':
+    if event == sg.WIN_CLOSED:
         break
-    if event == 'Go':
-        for num in range(2, 30):
-            for q in range(2, num):
-                if (num % q) == 0:
+    if event == 'Start':
+        for num in range(2, 501):
+            prime=True
+            for i in range(2, num):
+                if (num % i) == 0:
+                    prime = False
                     break
-                print(num)
-
+            if prime:
+                window['-MLINE-'].print(num, colors='white on red')
+            else:
+                window['-MLINE-'].print(num)
 
 window.close()

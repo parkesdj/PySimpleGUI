@@ -24,17 +24,26 @@ Spin Element in the Call Reference Documentation
 
 import PySimpleGUI as sg
 
-layout = [  [sg.Text('Timer GUI')],
-            # Insert your Spin code here
-            [sg.Spin()],
-            [sg.Button('Set'), sg.Button('Clear')]]   # and complete the reset of the layout
+spinner_values = [f'{i:02}' for i in range(60)]
+zero = '00'
 
-window = sg.Window('Window Title')    # Add your layout and set the font
+layout = [[sg.Text('Timer GUI')],
+          # Insert your Spin code here
+          [sg.Spin(spinner_values, size=(2, 1), key='-Hours-'), sg.Text(':'),\
+           sg.Spin(spinner_values, size=(2, 1), key='-Minutes-')],
+          [sg.Button('Set'), sg.Button('Clear')]]  # and complete the reset of the layout
+
+window = sg.Window('Timer', layout, font='Courier40')  # Add your layout and set the font
 
 while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED:
         break
+    if event == 'Set':
+        sg.Print('Hours =', values['-Hours-'], 'Minutes =', values['-Minutes-'])
+    if event == 'Clear':
+        window['-Hours-'].update(zero)
+        window['-Minutes-'].update(zero)
     # Add your code to handle events for buttons
 
 window.close()

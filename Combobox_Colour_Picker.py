@@ -21,13 +21,19 @@ Reminder - Always be sure and check for a window being closed and always close y
 import PySimpleGUI as sg
 
 color_names = ('red', 'green', 'blue', 'yellow')
-number_choices =
+number_choices = [f'{i}' for i in range(0, 100)]
+
 
 layout = [  [sg.Text('Choose a color, choose a number')],
-            # Insert your Combo Elements here
+            [sg.Combo(color_names, default_value=color_names[0], size=(15, 10),readonly=False, k='-COLOUR-')],
+            [sg.Combo(number_choices, default_value=number_choices[10], size=(3, 15), readonly=True, k='-NUMBER-')],
             [sg.Button('OK')] ]
 
 window = sg.Window('Window Title', layout)
 
 while True:
     event, values = window.read()
+    if event == sg.WIN_CLOSED:
+        break
+    if event == 'OK':
+        sg.Print(values)

@@ -16,30 +16,33 @@ https://pysimplegui.readthedocs.io/en/latest/call%20reference/#listbox-element
 
 import PySimpleGUI as sg
 
-trees = []
+trees = ['birch', 'willow', 'hazel']
 
 layout = [  [sg.Text('Manage a list')],
             [sg.Input(size=(15,1), key='-IP-')],   # Input element goes here
             [sg.Listbox(values= trees, size=(15, 15), key='-LBOX-')],   # Listbox goes here
-            [sg.Button('Add'), sg.Button('Delete')]]   # Your 3 buttons goes here
+            [sg.Button('Add', bind_return_key=True), sg.Button('Delete'), sg.Button('Exit')]]   # Your 3 buttons goes here
 
 window = sg.Window('Listbox Exercise', layout)
 
 while True:
     event, values = window.read()
 
-    print(event, values)
-
     if event == sg.WIN_CLOSED or event == 'Exit':
         break
 
     if event == 'Add':
-        trees.append(values.items())
-        window['-LBOX-'].update(values=trees)
+        trees.append(values['-IP-'])
+        window['-LBOX-'].update(trees)
 
         # print(trees)
 
     elif event == 'Delete':
+        trees.remove(values['-LBOX-'][0])
+        window['-LBOX-'].update(trees)
         pass
+
+    if event == 'Exit':
+        window.close()
 
 window.close()

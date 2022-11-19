@@ -16,18 +16,27 @@ Slider in the Call Reference Documentation
 """
 import PySimpleGUI as sg
 
-layout = [[sg.Text('Mixer', font='Default 15')],
-          # Your part goes here.....
+layout = [[sg.Text('Equalizer', font='Default 15')],
+          [sg.Slider((0, 100), orientation='v', size=(10, 20), enable_events=True, k=f'-BASS-'),
+          sg.Slider((0, 100), orientation='v', size=(10, 20), enable_events=True, k=f'-MIDD-'),
+          sg.Slider((0, 100), orientation='v', size=(10, 20), enable_events=True, k=f'-TREB-')],
+          [sg.Text('     Bass      Middle    Treble')],
           [sg.Button('Ok'), sg.Button('Reset')]]
 
 window = sg.Window('Equalizer', layout)
 
 while True:
     event, values = window.read()
+    print(values)
     if event == sg.WIN_CLOSED:
         break
     if event == 'Ok':
-        sg.popup(values, title='Values')
+        sg.popup(('Bass', values['-BASS-']), ('Mid', values['-MIDD-']), ('Treble', values['-TREB-']), title='Values')
+    if event == 'Reset':
+        window['-BASS-'].update(0)
+        window['-MIDD-'].update(0)
+        window['-TREB-'].update(0)
 
 
 window.close()
+

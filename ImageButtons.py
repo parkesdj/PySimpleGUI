@@ -12,7 +12,8 @@ Your task is to use these images in a window to implement the play and stop port
 
 Make a window with 2 Button elements
 Use the provided Base64 encoded images
-The artwork is larger than needed in this portion of the project, use your Button Element to reduce the image size shown to the user to be 1/3 the original size
+The artwork is larger than needed in this portion of the project, use your Button Element to reduce the image size shown
+to the user to be 1/3 the original size
 The buttons should blend completely into the background (they should appear round only)
 When each button is clicked, show a popup indicating what would happen in the program when complete (e.g. "Starting Playback")
 "Button Element" in the Call Reference Documentation
@@ -22,6 +23,8 @@ import PySimpleGUI as sg
 
 def main():
     layout = [[sg.Text('Media Player')],
+              [sg.Button(image_data=play_image, image_subsample=3, button_color=(sg.theme_background_color(), sg.theme_background_color()), border_width=0, key='-PLAY-'),
+              sg.Button(image_data=stop_image, image_subsample=3, button_color=(sg.theme_background_color(), sg.theme_background_color()), border_width=0, key='-STOP-')]
               # Write your Button Elements
               ]
 
@@ -31,6 +34,11 @@ def main():
         event, values = window.read()
         if event == sg.WIN_CLOSED:
             break
+        if event == '-PLAY-':
+            sg.Popup('Starting Playback')
+        if event == '-STOP-':
+            sg.Popup('Stopping Playback')
+
     # add your event processing here....
 
     window.close()

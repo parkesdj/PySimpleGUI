@@ -23,8 +23,8 @@ import PySimpleGUI as sg
 
 def main():
     layout = [[sg.Text('Media Player')],
-              [sg.Image(data=play_image, enable_events=True, metadata=False, key='-PLAY-'),
-              sg.Image(data=stop_image, enable_events=True, metadata=False, key='-STOP-')]
+              [sg.Image(play_image, subsample=3,  enable_events=True, metadata=False, key='-PLAY-'),
+              sg.Image(stop_image, subsample=3, enable_events=True, metadata=False, key='-STOP-')]
               # Write your Button Elements
               ]
 

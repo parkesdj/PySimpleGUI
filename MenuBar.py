@@ -53,6 +53,7 @@ NOTE - when running on Trinket, you'll need to either set no_titlebar=True when 
 """
 import PySimpleGUI as sg
 
+sg.theme('LightBlue3')
 
 menu_def = [['&File', ['&Open Note', '&Save Note', '&Cancel', 'C&lear', 'E&xit']],
             ['&Edit', ['&Paste', '&Undo']],
@@ -60,7 +61,7 @@ menu_def = [['&File', ['&Open Note', '&Save Note', '&Cancel', 'C&lear', 'E&xit']
 
 layout = [ [sg.Text('Note Taking App', font='Arial 14')],
             [sg.Menubar(menu_def, key='-MENU BAR-')],     # Add your elements
-            [sg.Multiline(size=(80, 20),key='-NOTE-')],
+            [sg.Multiline(size=(80, 20), font=('Arial14'), key='-NOTE-')],
             [sg.Save()]]
 
 # Note - on Trinket, you'll need to set no_titlebar so the menu displays correctly

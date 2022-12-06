@@ -38,6 +38,8 @@ def Status(key):
 def status_change(window, key, color):
     window[key].erase()
     window[key].draw_circle((20,20), radius=18, fill_color=color, line_width=0)
+def toggle(key):
+    # read current status
 
 colors = ('red', 'green', 'yellow')
 alert = ('up', 'down', 'error')

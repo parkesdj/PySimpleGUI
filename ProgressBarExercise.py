@@ -18,7 +18,10 @@ Update the Progress Bar using the counter's value
 import PySimpleGUI as sg
 
 # Create the layout as described in the exercise
-layout = [[]]
+layout = [[sg.Text('A typical custom progress meter')],
+              [sg.ProgressBar(100, orientation='v', size_px=(100, 10), key='-PROGRESS-', )],
+          [sg.Text('Reading  ', key='-OUTPUT-')],
+              [sg.Button('Increment', key='-INC-')]]
 
 window = sg.Window("Progress Bars", layout)
 
@@ -27,6 +30,11 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED:
         break
+    if event == '-INC-' :
+        counter += 1
+        window['-PROGRESS-'].update(counter * 5)
+        window['-OUTPUT-'].update(f'Counter = {counter}')
+
     # add your event processing here
 
 window.close()

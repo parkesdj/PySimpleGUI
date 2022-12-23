@@ -18,8 +18,8 @@ layout = [[sg.Table(values=data, headings=heads, def_col_width=10,
                     right_click_selects=True,
                     enable_click_events=True
                     )],
-          [sg.Text('Hello'), sg.Text(value, key='-VAL-')],
-          [sg.Exit()]]
+          [sg.Text('Value Selected'), sg.Text(value, key='-VAL-')],
+          [sg.Exit(), sg.Button('Edit Value', key='-EDIT-'), sg.Input(key='-INP-', enable_events=True)]]
 
 window = sg.Window('Table', layout)
 
@@ -33,3 +33,9 @@ while True :
         column = event[2][1]
         value = data[row][column]
         window['-VAL-'].update(value)
+    if event == '-EDIT-':
+        print(values.get('-INP-'))
+        new_val = values.get('-INP-')
+        data[row][column] = new_val
+        print(data)
+        window['-TABLE-'].update(data)
